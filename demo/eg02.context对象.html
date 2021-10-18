@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+
+    <script>
+        window.onload = function() {
+            let mycanvas = document.getElementById('mycanvas');
+
+            // canvas元素的图形绘制 依赖于它的绘图API
+            // 绘图API 被封装在一个 上下文对象中(context)
+
+            // 获得context对象
+            // canvas.getContext('2d');  // 平面绘图 参数是'2d'  
+            // 立体绘图 参数是 'webgl'  -> three.js
+
+            let ctx = mycanvas.getContext('2d');
+
+            // 我们将上下文对象 ctx  理解成画笔
+
+            // 在图形绘制之前 先设置绘制的样式(调颜料)
+            // ctx.fillStyle      填充样式
+            // ctx.strokeStyle    边框样式
+            // ctx.lineWidth      边框宽度
+
+            //  canvas的图形有两种基本绘制方式
+            // 1. fill  填充绘制
+            // 2. stroke  边框绘制
+
+            ctx.fillStyle = 'red';
+
+            // 矩形绘制
+            // ctx.fillRect(x , y , width , height);  绘制填充矩形
+            // ctx.strokeRect(x, y , width , height); 绘制边框矩形
+            ctx.fillRect(100, 100, 200, 200);
+
+
+
+            // 绘制图形的覆盖层级和绘制顺序有关
+
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(200, 200, 200, 200);
+
+
+
+            ctx.fillStyle = 'yellow';
+            ctx.fillRect(150, 150, 200, 200);
+
+
+            // ---------------------------------------
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 10;
+
+            ctx.strokeRect(50, 50, 400, 400);
+
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <!-- canvas 是html5 新增的元素 用于绘制图形 -->
+    <!-- canvas 的元素类型是 inline-block -->
+    <!-- 不兼容IE9以下的浏览器 -->
+    <!-- 画布大小设置 使用属性 不使用样式 -->
+    <!-- 兼容性处理 当浏览器无法识别元素时 浏览器默认将该元素 识别为 行内元素 -->
+    <div>
+        <canvas width="500" height="500" id="mycanvas">
+            您的浏览器不支持 canvas 元素 请升级至最新版本
+        </canvas>
+    </div>
+</body>
+
+</html>

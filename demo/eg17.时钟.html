@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let canvas = document.getElementById('mycanvas');
+            let ctx = canvas.getContext('2d');
+
+            function clock() {
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // 获得当前时间
+                let now = new Date();
+                let h = now.getHours(); // 0-23
+                let m = now.getMinutes(); // 0-59
+                let s = now.getSeconds(); // 0-59
+
+                // 系统时间的取值范围是 0-23 
+                // 需要将24小时计时方式转成12小时计时方式
+
+                h = h + (m / 60);
+                h = h > 12 ? h - 12 : h;
+
+                // 绘制一个表盘
+                ctx.beginPath();
+                ctx.arc(250, 250, 200, 0, 2 * Math.PI);
+                ctx.lineWidth = 8;
+                ctx.stroke();
+                ctx.closePath();
+
+                // 绘制分刻度线
+                for (let i = 0; i < 60; i++) {
+                    ctx.save();
+                    ctx.strokeStyle = 'blue';
+                    ctx.lineWidth = 5;
+                    ctx.translate(250, 250); // 将画笔移动到圆心
+                    ctx.rotate(Math.PI / 180 * i * 6); // 旋转
+                    ctx.beginPath();
+                    ctx.moveTo(0, -185);
+                    ctx.lineTo(0, -195);
+                    ctx.stroke();
+                    ctx.closePath();
+                    ctx.restore();
+                }
+
+                // 绘制时刻度线
+                for (let i = 0; i < 12; i++) {
+                    ctx.save();
+                    ctx.strokeStyle = 'red';
+                    ctx.lineWidth = 7;
+                    ctx.translate(250, 250); // 将画笔移动到圆心
+                    ctx.rotate(Math.PI / 180 * i * 30); // 旋转
+                    ctx.beginPath();
+                    ctx.moveTo(0, -180);
+                    ctx.lineTo(0, -195);
+                    ctx.stroke();
+                    ctx.closePath();
+                    ctx.restore();
+                }
+
+                // 绘制时针
+                ctx.save();
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 7;
+                ctx.translate(250, 250); // 将画笔移动到圆心
+                ctx.rotate(Math.PI / 180 * (30 * h)); // 旋转
+                ctx.beginPath();
+                ctx.moveTo(0, -150);
+                ctx.lineTo(0, 20);
+                ctx.stroke();
+                ctx.closePath();
+                ctx.restore();
+
+                // 绘制分针
+                ctx.save();
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 5;
+                ctx.translate(250, 250); // 将画笔移动到圆心
+                ctx.rotate(Math.PI / 180 * (6 * m)); // 旋转
+                ctx.beginPath();
+                ctx.moveTo(0, -160);
+                ctx.lineTo(0, 20);
+                ctx.stroke();
+                ctx.closePath();
+                ctx.restore();
+
+                // 绘制秒针
+                ctx.save();
+                ctx.strokeStyle = 'red';
+                ctx.lineWidth = 3;
+                ctx.translate(250, 250); // 将画笔移动到圆心
+                ctx.rotate(Math.PI / 180 * (6 * s)); // 旋转
+                ctx.beginPath();
+                ctx.moveTo(0, -170);
+                ctx.lineTo(0, 20);
+                ctx.stroke();
+                ctx.closePath();
+                ctx.restore();
+            }
+
+            clock();
+
+            setInterval(clock, 1000);
+        }
+    </script>
+</head>
+
+<body>
+
+    <div>
+        <canvas width="500" height="500" id="mycanvas">
+            您的浏览器不支持 canvas 元素 请升级至最新版本
+        </canvas>
+    </div>
+</body>
+
+</html>

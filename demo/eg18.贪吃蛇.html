@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mycanvas {
+            border: 1px solid black;
+            margin: 100px auto;
+            display: block;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let canvas = document.getElementById('mycanvas');
+            let ctx = canvas.getContext('2d');
+
+            let direction = 2; // 方向 0表示左 1表示上 2表示右 3表示下
+
+            let timer = null; // 计时器
+
+            let len = 10; // 蛇的长度
+
+            // 蛇的初始位置
+            let x = 8;
+            let y = 8;
+            let speed = 100; // 速度
+            let size = 8; // 每一节蛇的大小
+
+            let map = []; // 用于存放蛇的运动轨迹
+
+
+            // 食物坐标
+            let foodX;
+            let foodY;
+
+            function game() {
+                ctx.fillStyle = 'green';
+
+                // 设置运动方向进行绘制
+                switch (direction) {
+                    case 0:
+                        x = x - size;
+                        break;
+                    case 1:
+                        y = y - size;
+                        break;
+                    case 2:
+                        x = x + size;
+                        break;
+                    case 3:
+                        y = y + size;
+                        break;
+                }
+
+
+                // 边界碰撞检测
+                if (x >= canvas.width || x < 0 || y >= canvas.height || y < 0) {
+                    clearInterval(timer);
+                    alert('game over');
+                    location.reload();
+                }
+
+                // 自身碰撞检测
+                let carch = map.some(elm => elm.x === x && elm.y === y);
+                if (carch) {
+                    clearInterval(timer);
+                    alert('game over');
+                    location.reload();
+                }
+
+
+                if (map.length > len) { // 数据长度大于蛇的长度
+                    // 删除数组中的第一个元素 并且 擦除画板该区域
+                    let first = map.shift();
+                    ctx.clearRect(first.x, first.y, size, size);
+
+                }
+
+
+                map.push({
+                    x,
+                    y
+                });
+
+                ctx.fillRect(x, y, size, size);
+
+                // 判断蛇是否吃到食物
+                if (foodX == x && foodY == y) {
+                    len++;
+                    getFood();
+                }
+
+            }
+
+            function getFood() {
+                foodX = Math.floor(Math.random() * 50) * 8;
+                foodY = Math.floor(Math.random() * 50) * 8;
+
+                let has = map.some(elm => elm.x === foodX && elm.y === foodY);
+                if (has) {
+                    return getFood();
+                }
+
+                ctx.fillStyle = "red";
+                ctx.fillRect(foodX, foodY, size, size);
+            }
+            getFood();
+
+
+            timer = setInterval(game, speed);
+
+
+
+            // 键盘事件用于改变方向
+            document.onkeyup = function(e) {
+                if (e.keyCode >= 37 && e.keyCode <= 40) direction = e.keyCode - 37;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="mycanvas" width="400" height="400"></canvas>
+</body>
+
+</html>

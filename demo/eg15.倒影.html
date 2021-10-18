@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let canvas = document.getElementById('mycanvas');
+            let ctx = canvas.getContext('2d');
+
+
+            ctx.translate(200, 100);
+
+            // 创建一段文本
+            ctx.font = '30px Microsoft YaHei';
+            ctx.fillStyle = 'orange';
+            ctx.textAlign = 'center';
+            ctx.fillText('你好世界!', 0, 0);
+
+            ctx.scale(1, -1); // 将下一文本倒过来
+
+            // ctx.translate(0, 20);
+            ctx.transform(1, 0, -0.7, 0.7, 10, -20);
+
+
+            ctx.fillStyle = 'red';
+            ctx.fillText('你好世界!', 0, 0);
+
+        }
+    </script>
+</head>
+
+<body>
+
+    <div>
+        <canvas width="500" height="500" id="mycanvas">
+            您的浏览器不支持 canvas 元素 请升级至最新版本
+        </canvas>
+    </div>
+</body>
+
+</html>

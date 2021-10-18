@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let canvas = document.getElementById('mycanvas');
+            let ctx = canvas.getContext('2d');
+
+            // 绘制圆弧
+            // ctx.arc(x, y, radius, starAngle, endAngle, anticlockwise)
+
+            // 参数 anticlockwise 默认值 false 表示顺时针
+            // 可以设置为 true 为逆时针
+
+            // JavaScript 中是没有角度的  有的是弧度
+            // PI 表示 180°
+            // 2PI 表示 360°
+
+            // 角度是顺时针计算的 右边 表示 0°  左边表示 180°
+
+            // arc只是设置圆弧 并不进行绘图
+            // ctx.arc(250, 250, 200, 0, Math.PI);
+
+            // // 设置圆弧后进行绘图
+            // ctx.stroke();
+
+
+            // ctx.arc(250, 250, 200, 0, Math.PI, true);
+
+            // ctx.strokeStyle = "red";
+            // // 设置圆弧后进行绘图
+            // ctx.stroke();
+
+            // 圆弧 在canvas中 是线条路径的分类
+            // 所以的线条路径会自动连接在一起
+            // 当第一个线条结束时 它的结尾点会自动连接到 下一个线条的开始点
+
+            // ----------------------------------------------------
+            // 路径闭合
+            // 如果不想让线条的路径自动连接 就需要手动设置路径闭合
+
+            // ctx.beginPath();   // 开始路径
+            // ctx.closePath();   // 结束路径
+
+            // ctx.beginPath();
+            // ctx.arc(250, 250, 200, 1 / 2 * Math.PI, 3 / 2 * Math.PI);
+            // ctx.strokeStyle = "red";
+            // ctx.stroke();
+            // ctx.closePath();
+
+            // ctx.beginPath();
+            // ctx.arc(250, 250, 200, 1 / 2 * Math.PI, 3 / 2 * Math.PI, true);
+            // ctx.strokeStyle = "blue";
+            // ctx.stroke();
+            // ctx.closePath();
+
+            // -----------------------------------------------------
+            // ctx.arc(250, 250, 200, 0, 1 / 2 * Math.PI);
+            // // ctx.stroke();
+            // ctx.fill();
+
+
+            for (let i = 1; i <= 10; i++) {
+                ctx.beginPath();
+
+                ctx.arc(20 * i, 20 * i, i * 10, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.closePath();
+            }
+
+
+
+        }
+    </script>
+</head>
+
+<body>
+
+    <div>
+        <canvas width="500" height="500" id="mycanvas">
+            您的浏览器不支持 canvas 元素 请升级至最新版本
+        </canvas>
+    </div>
+</body>
+
+</html>

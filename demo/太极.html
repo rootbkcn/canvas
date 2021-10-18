@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('cns');
+            var context = canvas.getContext('2d');
+            var i = 0;
+
+            function taiji(i) {
+                var onedeg = Math.PI / 180;
+                // 弧度 = 2 * PI / 360 * 角度
+                // 弧度 = PI / 180 * 角度
+                // 获得园上面每一个X,Y 坐标点
+                // 若圆心位置是a,b,半径为r
+                // x = a + Math.sin(Math.PI/180) * r
+                // y = b + Math.cos(Math.PI/180) * r
+
+                context.clearRect(0, 0, 400, 400);
+                context.beginPath();
+                //大黑圈
+                context.arc(200, 200, 200, Math.PI + onedeg * i, 0 + onedeg * i);
+                context.fill();
+                //大白圈
+                context.beginPath();
+                context.arc(200, 200, 200, 0 + onedeg * i, Math.PI + onedeg * i);
+                context.stroke();
+                //中黑圈
+                context.beginPath();
+                context.arc(200 + Math.cos(onedeg * i) * 100, 200 + Math.sin(onedeg * i) * 100, 100, 0, Math.PI * 2);
+                context.fill();
+                //中白圈
+                context.beginPath();
+                context.arc(200 - Math.cos(onedeg * i) * 100, 200 - Math.sin(onedeg * i) * 100, 100, 0, Math.PI * 2);
+                context.fillStyle = 'white';
+                context.fill();
+                //小白圈
+                context.beginPath();
+                context.arc(200 + Math.cos(onedeg * i) * 100, 200 + Math.sin(onedeg * i) * 100, 30, 0, Math.PI * 2);
+                context.fill();
+                //小黑圈
+                context.beginPath();
+                context.arc(200 - Math.cos(onedeg * i) * 100, 200 - Math.sin(onedeg * i) * 100, 30, 0, Math.PI * 2);
+                context.fillStyle = 'black';
+                context.fill();
+                context.closePath();
+            }
+
+
+            setInterval(function() {
+                if (i == 360) i = 0;
+                taiji(i);
+                i++;
+            }, 10);
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="cns" width="400" height="400"></canvas>
+</body>
+
+</html>

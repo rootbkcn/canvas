@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let canvas = document.getElementById('mycanvas');
+            let ctx = canvas.getContext('2d');
+
+            let img = document.createElement('img');
+            img.src = './VCG41168340092.jpg';
+
+            img.onload = function() { // 绘制图片需要在图片加载完毕后执行
+                ctx.drawImage(img, 0, 0);
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div>
+        <canvas width="500" height="500" id="mycanvas">
+            您的浏览器不支持 canvas 元素 请升级至最新版本
+        </canvas>
+    </div>
+</body>
+
+</html>

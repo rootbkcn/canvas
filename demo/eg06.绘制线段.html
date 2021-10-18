@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let canvas = document.getElementById('mycanvas');
+            let ctx = canvas.getContext('2d');
+
+            // 线段绘制 
+            // ctx.moveTo(x,y);  // 将画笔移动到某个位置
+            // ctx.lineTo(x,y);  // 从上一个lineTo或moveTo点 绘制线段到 本次坐标
+
+            // moveTo 可以独立一个新路径
+
+            // 也可以使用 beginPath 和 closePath 来设置路径
+
+            // ctx.moveTo(100, 100);
+            // ctx.lineTo(200, 200);
+            // ctx.lineTo(100, 200);
+            // ctx.stroke();
+
+            // ctx.beginPath();
+            // ctx.lineTo(400, 100);
+            // ctx.lineTo(400, 500);
+            // ctx.stroke();
+            // ctx.closePath();
+
+
+
+            // moveTo和lineTo通常用于绘制多边形
+            // 五角星
+            // ctx.moveTo(234, 57);
+            // ctx.lineTo(122, 418);
+            // ctx.lineTo(416, 194);
+            // ctx.lineTo(52, 194);
+            // ctx.lineTo(342, 418);
+            // // ctx.lineTo(234, 57);
+            // // ctx.stroke();
+
+            // ctx.fillStyle = 'red';
+            // ctx.fill();
+
+            // -----------------------------------------
+
+            ctx.moveTo(100, 100);
+            ctx.lineTo(200, 200);
+            ctx.lineTo(100, 200);
+            ctx.lineTo(200, 100);
+            ctx.lineTo(100, 150);
+            ctx.lineTo(150, 250);
+
+            ctx.stroke();
+            ctx.fill();
+        }
+    </script>
+</head>
+
+<body>
+
+    <div>
+        <canvas width="500" height="500" id="mycanvas">
+            您的浏览器不支持 canvas 元素 请升级至最新版本
+        </canvas>
+    </div>
+</body>
+
+</html>

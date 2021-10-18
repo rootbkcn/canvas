@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let canvas = document.getElementById('mycanvas');
+            let ctx = canvas.getContext('2d');
+
+            let x = 20,
+                y = 20,
+                dx = 2,
+                dy = 3.4;
+
+            ctx.fillStyle = 'red';
+
+            function cricle(x, y) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // 在每次绘图之前 清空画布
+                ctx.beginPath();
+                ctx.arc(x, y, 20, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.closePath();
+            }
+
+
+            setInterval(function() {
+                if (x + dx > canvas.width - 20 || x + dx < 20) {
+                    dx = -dx;
+                }
+
+                if (y + dy > canvas.height - 20 || y + dy < 20) {
+                    dy = -dy;
+                }
+
+
+                x += dx;
+                y += dy;
+                cricle(x, y);
+            }, 10);
+        }
+    </script>
+</head>
+
+<body>
+
+    <div>
+        <canvas width="500" height="500" id="mycanvas">
+            您的浏览器不支持 canvas 元素 请升级至最新版本
+        </canvas>
+    </div>
+</body>
+
+</html>
